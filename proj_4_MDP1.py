@@ -254,14 +254,15 @@ expected_output = """Iteration | # chg actions | V[0]
 #plt.plot(Vs_PI);
 
 '''Q-Learning'''
+env = gym.make('FrozenLake-v0')
 Q = np.zeros((env.observation_space.n, env.action_space.n))
 rewards = []
 iterations = []
 
 # Parameters
-alpha = 0.75
+alpha = 0.55
 discount = 0.95
-episodes = 5000
+episodes = 1000
 
 # Episodes
 for episode in range(episodes):
@@ -294,7 +295,7 @@ def chunk_list(l, n):
     for i in range(0, len(l), n):
         yield l[i:i + n]
 
-size = episodes / 50
+size = int(episodes / 50)
 chunks = list(chunk_list(rewards, size))
 averages = [sum(chunk) / len(chunk) for chunk in chunks]
 
